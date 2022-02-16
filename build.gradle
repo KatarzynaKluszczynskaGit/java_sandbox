@@ -9,4 +9,12 @@ repositories {
 dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.5'
+}
+
+test {
+    useJUnit {
+        includeCategories 'Tests.ObjectMatcher'
+        excludeCategories 'Tests.BeanMatcher'
+    }
 }

@@ -2,11 +2,15 @@ package Tests;
 
 import CustomMatchers.IsPositiveInteger;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+
+interface ObjectMatcher { /* category marker */ }
+interface BeanMatcher { /* category marker */ }
 
 public class HamcrestAssertionsTests {
 
@@ -18,23 +22,26 @@ public class HamcrestAssertionsTests {
             employee1, employee2, employee3);
 
     //Object matcher
+    @Category(ObjectMatcher.class)
     @Test
     public void testEquals() {
         assertThat(employee1, equalTo(employee2));
     }
 
+    @Category(ObjectMatcher.class)
     @Test
     public void given2Strings_whenEqual_thenCorrect() {
         assertThat(employee1.getName(), equalToIgnoringCase(employee2.getName()));
     }
 
     //Bean matcher
-
+    @Category(BeanMatcher.class)
     @Test
     public void givenBean_whenHasValue_thenCorrect() {
         assertThat(employee1, hasProperty("name"));
     }
 
+    @Category(BeanMatcher.class)
     @Test
     public void givenBean_whenHasCorrectValue_thenCorrect() {
         assertThat(employee1, samePropertyValuesAs(employee3));
